@@ -22,6 +22,8 @@ public class Main {
         background.add(new BottomBar(), BorderLayout.PAGE_END);
         background.add(new MemoryEditor(mima.getSpeicher()).getPanel(), BorderLayout.WEST);
 
+
+
         frame.add(background);
         frame.pack();
         frame.setVisible(true);
