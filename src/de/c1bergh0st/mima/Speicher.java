@@ -1,0 +1,32 @@
+package de.c1bergh0st.mima;
+
+import de.c1bergh0st.debug.Debug;
+
+public class Speicher {
+    Register sdr, sar;
+    int[] hauptSpeicher;
+
+    public Speicher(Register sdr, Register sar){
+        if(sdr != null && sar != null && sar.getSize() == 20){
+            this.sdr = sdr;
+            this.sar = sar;
+        } else {
+            Debug.sendErr("SDR OR SAR IS NULL OR INVALID SIZE",2);
+        }
+        hauptSpeicher = new int[1048576];
+    }
+
+    public void updateSDR(){
+        sdr.setValue(hauptSpeicher[sar.getValue()]);
+    }
+
+    public void write(){
+        hauptSpeicher[sar.getValue()] = sdr.getValue();
+    }
+
+    public void setMem(int adr, int value){
+        if(adr >= 0 && adr < 1048576){
+            hauptSpeicher[adr] = value;
+        }
+    }
+}
