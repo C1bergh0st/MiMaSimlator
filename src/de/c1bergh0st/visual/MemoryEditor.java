@@ -10,6 +10,7 @@ public class MemoryEditor{
     private JScrollPane panel;
 
     public MemoryEditor(){
+        //How much of the Memory should be shown
         int shownLength = 400;
         //int shownLength = 1048576;
         String[] cols = {"Adress", "Binary", "Instr.", "Masked Value"};
