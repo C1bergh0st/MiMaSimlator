@@ -4,6 +4,7 @@ import de.c1bergh0st.debug.Debug;
 import de.c1bergh0st.mima.Steuerwerk;
 import de.c1bergh0st.visual.BottomBar;
 import de.c1bergh0st.visual.MemoryEditor;
+import de.c1bergh0st.visual.TopBar;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,6 +21,7 @@ public class Main {
         background.setPreferredSize(new Dimension(800,600));
 
         background.add(new BottomBar(), BorderLayout.PAGE_END);
+        background.add(new TopBar(),BorderLayout.PAGE_START);
         background.add(new MemoryEditor(mima.getSpeicher()).getPanel(), BorderLayout.WEST);
 
 
