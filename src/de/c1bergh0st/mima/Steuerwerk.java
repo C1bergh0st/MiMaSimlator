@@ -3,6 +3,8 @@ package de.c1bergh0st.mima;
 import de.c1bergh0st.debug.Debug;
 
 public class Steuerwerk {
+    public static final int MAX_ADRESS = 1048575;
+
     private Register akku;
     private Register sar, sdr;
     private Speicher speicher;

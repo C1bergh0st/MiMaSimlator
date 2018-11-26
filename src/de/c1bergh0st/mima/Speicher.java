@@ -25,8 +25,17 @@ public class Speicher {
     }
 
     public void setMem(int adr, int value){
-        if(adr >= 0 && adr < 1048576){
+        if(adr >= 0 && adr <= Steuerwerk.MAX_ADRESS){
             hauptSpeicher[adr] = value;
         }
     }
+
+    public int getMem(int adr){
+        if(adr >= 0 && adr <= Steuerwerk.MAX_ADRESS){
+            return hauptSpeicher[adr];
+        }
+        return 0;
+    }
+
+
 }
