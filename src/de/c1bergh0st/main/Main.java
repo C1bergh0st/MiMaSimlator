@@ -20,7 +20,7 @@ public class Main {
         background.setPreferredSize(new Dimension(800,600));
 
         background.add(new BottomBar(), BorderLayout.PAGE_END);
-        background.add(new MemoryEditor().getPanel(), BorderLayout.WEST);
+        background.add(new MemoryEditor(mima.getSpeicher()).getPanel(), BorderLayout.WEST);
 
         frame.add(background);
         frame.pack();

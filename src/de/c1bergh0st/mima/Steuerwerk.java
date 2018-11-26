@@ -255,4 +255,7 @@ public class Steuerwerk {
         shouldHalt = true;
     }
 
+    public Speicher getSpeicher(){
+        return speicher;
+    }
 }

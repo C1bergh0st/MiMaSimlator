@@ -28,7 +28,8 @@ class TableListener implements TableModelListener {
             if(isValidInput(adress, inputField)){
                 speicher.setMem(adress,parseValue(adress, inputField));
             }else{
-                table.getModel().setValueAt(speicher.getMem(adress),adress,inputField);
+                //If the new Value is invalid we reset it
+                table.getModel().setValueAt(Integer.toBinaryString(speicher.getMem(adress)),adress,inputField);
             }
         }
 
