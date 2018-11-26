@@ -54,6 +54,13 @@ class TableListener implements TableModelListener {
         table.getModel().setValueAt(ParseUtil.code(value),adress,2);
     }
 
+
+    /** Parses the Input into a Register Int
+     *
+     * @param adress The Adress of the changed Value
+     * @param inputField The Type of Input (1 means binary, 2 means Command)
+     * @return The int value of the Memory Register
+     */
     private int parseValue(int adress, int inputField) {
         String value = (String)table.getModel().getValueAt(adress, inputField);
         if(inputField == 1){
@@ -64,15 +71,23 @@ class TableListener implements TableModelListener {
         return 0;
     }
 
+    /** Checks if the newly Changed String is valid
+     *
+     * @param adress The Adress of the changed Value
+     * @param inputField The Type of Input (1 means binary, 2 means Command)
+     * @return Whether the changed String is valid
+     */
     private boolean isValidInput(int adress, int inputField) {
+        //we get the String that was changed
         String value = (String)table.getModel().getValueAt(adress, inputField);
         //check if the newly saved value lies within the adress space
         if(adress >= 0 && adress <= Steuerwerk.MAX_ADRESS){
-
+            //if the inputField is 1 it should be a binary String
             if(inputField == 1) {//Binary Input
                 if (ParseUtil.validBinary(value)){
                     return true;
                 }
+            //if the inputField is 2 it should be a command String
             } else if(inputField == 2){//Command style input
                 if(ParseUtil.validCommand(value)){
                     return true;

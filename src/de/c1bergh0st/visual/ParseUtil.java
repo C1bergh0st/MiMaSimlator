@@ -14,7 +14,7 @@ public class ParseUtil {
      * @return Wheter the String only contains 1's and 0's and is max 24 'bits' long
      */
     public static boolean validBinary(String binaryString){
-        String trimmedString = binaryString.trim();
+        String trimmedString = binaryString.replaceAll("\\s","");
         while(trimmedString.length() < 24){
             trimmedString = "0" + trimmedString;
         }
@@ -27,10 +27,11 @@ public class ParseUtil {
     }
 
     public static boolean validCommand(String commandString){
-        String s = commandString.trim();
+        String s = commandString.replaceAll("\\s","");
         if(s.matches("^(LDC|LDV|STV|ADD|AND|OR|XOR|EQL|JMP|JMN|LDIV|STIV|RAR|NOT|EMPTY|HALT)[0-9]+$")){
             return true;
         }
+        Debug.send("Regex didnt match: "+s);
         return false;
     }
 
@@ -83,7 +84,11 @@ public class ParseUtil {
         safeValue &= 0b00000000000011111111111111111111;
         String[] commands = {"LDC", "LDV", "STV", "ADD", "AND", "OR", "XOR", "EQL", "JMP", "JMN", "LDIV", "STIV", "RAR", "NOT", "EMPTY", "HALT"};
         if(b >= 0 && b < 16){
-            return commands[b] + safeValue;
+            String s =  commands[b] +" ";
+            if(b < 12){
+                s += safeValue;
+            }
+            return s;
         }
         return "Error";
     }
