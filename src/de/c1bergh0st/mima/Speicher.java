@@ -37,5 +37,10 @@ public class Speicher {
         return 0;
     }
 
+    public void clear(){
+        for(int i = 0; i < hauptSpeicher.length; i++){
+            setMem(i,0);
+        }
+    }
 
 }

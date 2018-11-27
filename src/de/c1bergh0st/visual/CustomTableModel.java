@@ -10,7 +10,7 @@ public class CustomTableModel extends DefaultTableModel {
 
 
     public boolean isCellEditable(int row, int column){
-        if(column == 0){
+        if(column == 0 || column == 3){
             return false;
         }
         return true;

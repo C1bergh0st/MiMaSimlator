@@ -1,6 +1,8 @@
 package de.c1bergh0st.mima;
 
 import de.c1bergh0st.debug.Debug;
+import de.c1bergh0st.visual.DialogUtil;
+import de.c1bergh0st.visual.ParseUtil;
 
 public class Steuerwerk {
     public static final int MAX_ADRESS = 1048575;
@@ -28,19 +30,35 @@ public class Steuerwerk {
         alu = new ALU(x,y,z);
         shouldHalt = false;
         akku.setValue(0b111111111111111111111111);
-        speicher.setMem(0,0b000011111111111111111111);
-        speicher.setMem(1,0b110111111111111111111111);
-        speicher.setMem(2,0b000111111111111111111111);
-        speicher.setMem(3,0b111111111111111111111111);
-        speicher.setMem(4,0b111111111111111111111111);
-        speicher.setMem(5,0b111111111111111111111111);
-        step();
-        step();
-        step();
+        speicher.setMem(0,0b000000000000000000001111);
+        speicher.setMem(1,0b000100000000000000000000);
+        speicher.setMem(2,0b101100000000000000000000);
+        speicher.setMem(3,0b000000000000000000000001);
+        speicher.setMem(4,0b001100000000000000000000);
+        speicher.setMem(5,0b001000000000000000000000);
+        speicher.setMem(6,0b011100000000000000001010);
+        speicher.setMem(7,0b110100000000000000000000);
+        speicher.setMem(8,0b100100000000000000000001);
+        speicher.setMem(9,0b111100000000000000000000);
+        speicher.setMem(10,0b000000000000000000100000);
         Debug.send(""+akku.getValue());
     }
 
-    public void step(){
+    public void stepTill(int maxsteps){
+        //Reset the IAR to 0
+        iar.setValue(0);
+        //Execute Steps untill a Halt or untill maxsteps have been executed
+        int steps = 0;
+        while(!shouldHalt && steps < maxsteps){
+            lightstep();
+            steps++;
+        }
+        if(steps == maxsteps){
+            DialogUtil.showErrorToUser("Error","After "+steps+", no HALT Command was found");
+        }
+    }
+
+    public void lightstep(){
         //load the next instruction from memory into the ir
         sar.setValue(iar.getValue());
         speicher.updateSDR();
@@ -48,12 +66,17 @@ public class Steuerwerk {
 
         //get the OpCode
         byte opCode = ir.getCommand();
-        Debug.send("opCode: "+opCode + "with adress" + ir.getMaskedValue());
+
         //increment the iar by one
         //TODO: use ALU
         iar.setValue(iar.getValue()+1);
 
-        switch (opCode){
+        execInstr(opCode);
+
+    }
+
+    private void execInstr(byte b){
+        switch (b){
             case 0: //LDC
                 ldc();
                 break;
@@ -106,6 +129,25 @@ public class Steuerwerk {
                 Debug.sendErr("INSTRUCTION > 0B1111",2);
                 break;
         }
+    }
+
+    public void step(){
+        //load the next instruction from memory into the ir
+        sar.setValue(iar.getValue());
+        speicher.updateSDR();
+        ir.setValue(sdr.getValue());
+
+        //get the OpCode
+        int opCode = ir.getValue();
+        byte opByte = ir.getCommand();
+        Debug.send(iar.getValue()+" : "+ ParseUtil.code(opCode));
+        //increment the iar by one
+        //TODO: use ALU
+        iar.setValue(iar.getValue()+1);
+
+        execInstr(opByte);
+
+        Debug.send("Akku:"+akku.getValue());
     }
 
     private void ldc(){
@@ -253,6 +295,7 @@ public class Steuerwerk {
 
     private void halt(){
         shouldHalt = true;
+        Debug.send("SHOULDHALT");
     }
 
     public Speicher getSpeicher(){

@@ -3,16 +3,22 @@ package de.c1bergh0st.visual;
 import javax.swing.*;
 import de.c1bergh0st.mima.*;
 
+import java.util.TimerTask;
+
 public class MemoryEditor{
     private JTable table;
     private JScrollPane panel;
+    private CustomTableModel model;
+    private TableListener listener;
 
     public MemoryEditor(Speicher speicher){
         //How much of the Memory should be shown
         int shownLength = 400;
         //int shownLength = 1048576;
-        String[] cols = {"Adress", "Binary", "\"Code\""};
-        String[][] data = new String[shownLength][3];
+        String[] cols = {"Adress", "Binary", "\"Code\"", "Decimal"};
+        String[][] data = new String[shownLength][cols.length];
+
+
 
         for(int i = 0; i < shownLength; i++){
             data[i][0] = ""+i;
@@ -23,9 +29,9 @@ public class MemoryEditor{
                 data[i][x] = new String();
             }
         }
-        CustomTableModel model = new CustomTableModel(data, cols);
+        model = new CustomTableModel(data, cols);
         table = new JTable(model);
-        TableListener listener = new TableListener(table,speicher);
+        listener = new TableListener(table,speicher);
         model.addTableModelListener(listener);
         table.getColumnModel().getColumn(0).setPreferredWidth(60);
         table.getColumnModel().getColumn(1).setPreferredWidth(160);
@@ -33,6 +39,14 @@ public class MemoryEditor{
 
         panel = new JScrollPane(table);
 
+    }
+
+    public void revalidate(){
+        listener.revalidate();
+    }
+
+    public TableListener getListener(){
+        return listener;
     }
 
     public JScrollPane getPanel() {
