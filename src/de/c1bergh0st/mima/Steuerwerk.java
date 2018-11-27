@@ -8,16 +8,20 @@ public class Steuerwerk {
     public static final int MAX_ADRESS = 1048575;
     public static final int MAX_VALUE = 16777215;
 
-    private Register akku;
-    private Register sar, sdr;
-    private Speicher speicher;
-    private Register iar, ir;
-    private Register eins;
-    private ALU alu;
-    private Register x, y, z;
-    public boolean shouldHalt;
-    int lastExecutedAdress;
-    int lastChange;
+    private final Register akku;
+    private final Register sar;
+    private final Register sdr;
+    private final Speicher speicher;
+    private final Register iar;
+    private final Register ir;
+    private final Register eins;
+    private final ALU alu;
+    private final Register x;
+    private final Register y;
+    private final Register z;
+    private boolean shouldHalt;
+    private int lastExecutedAdress;
+    private int lastChange;
 
 
     public Steuerwerk(){
@@ -65,7 +69,7 @@ public class Steuerwerk {
         }
     }
 
-    public void lightstep(){
+    private void lightstep(){
         lastExecutedAdress = iar.getValue();
         //load the next instruction from memory into the ir
         sar.setValue(iar.getValue());

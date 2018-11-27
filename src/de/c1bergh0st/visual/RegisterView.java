@@ -6,10 +6,10 @@ import javax.swing.*;
 import java.awt.*;
 
 public class RegisterView extends JPanel {
-    private Steuerwerk mima;
-    private VisualRegister akku;
-    private VisualRegister ir;
-    private VisualRegister iar;
+    private final Steuerwerk mima;
+    private final VisualRegister akku;
+    private final VisualRegister ir;
+    private final VisualRegister iar;
 
 
     public RegisterView(Steuerwerk mima){

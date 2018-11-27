@@ -8,41 +8,33 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class TopBar extends JPanel{
-    private JButton lock;
-    private JButton reset;
-    private JButton save;
-    private JButton load;
-    private JButton clear;
-    private JButton help;
-    private Steuerwerk mima;
-    private MemoryEditor memEdit;
-    HelpWindow currentHelpWindow;
+    private HelpWindow currentHelpWindow;
 
     public TopBar(Steuerwerk mima, MemoryEditor memEdit){
-        this.mima = mima;
-        this.memEdit = memEdit;
+        Steuerwerk mima1 = mima;
+        MemoryEditor memEdit1 = memEdit;
         this.setLayout(new FlowLayout());
         this.setBorder(BorderFactory.createLineBorder(Color.black));
 
-        lock = new JButton("Lock Code");
+        JButton lock = new JButton("Lock Code");
         lock.setEnabled(false);
-        reset = new JButton("Reset");
+        JButton reset = new JButton("Reset");
         reset.setEnabled(false);
         add(lock);
         add(reset);
 
         add(Box.createHorizontalStrut(20));
 
-        save = new JButton("Save");
+        JButton save = new JButton("Save");
         save.setEnabled(false);
-        load = new JButton("Load");
+        JButton load = new JButton("Load");
         load.setEnabled(false);
         add(save);
         add(load);
 
         add(Box.createHorizontalStrut(20));
 
-        clear = new JButton("Clear Mem");
+        JButton clear = new JButton("Clear Mem");
         clear.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
@@ -57,7 +49,7 @@ public class TopBar extends JPanel{
 
         add(Box.createHorizontalStrut(20));
 
-        help = new JButton("Help");
+        JButton help = new JButton("Help");
         help.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if(currentHelpWindow != null){

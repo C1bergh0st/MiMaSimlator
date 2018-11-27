@@ -4,9 +4,9 @@ import de.c1bergh0st.debug.Debug;
 import de.c1bergh0st.mima.Register;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
+@SuppressWarnings("WeakerAccess")
 public class VisualRegister extends JPanel {
     public static final int FULLVALUE = 0;
     public static final int ADRESS = 1;

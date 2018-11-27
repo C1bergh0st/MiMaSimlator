@@ -1,19 +1,16 @@
 package de.c1bergh0st.visual;
 
-import de.c1bergh0st.debug.Debug;
 import de.c1bergh0st.mima.Speicher;
 import de.c1bergh0st.mima.Steuerwerk;
 
 import javax.swing.*;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
-import java.util.TimerTask;
-import java.util.Timer;
 
 class TableListener implements TableModelListener {
-    JTable table;
-    Speicher speicher;
-    long lastchange;
+    private JTable table;
+    private Speicher speicher;
+    private long lastchange;
 
     public TableListener(JTable table, Speicher speicher) {
         this.table = table;
@@ -101,6 +98,7 @@ class TableListener implements TableModelListener {
      * @param inputField The Type of Input (1 means binary, 2 means Command)
      * @return Whether the changed String is valid
      */
+    @SuppressWarnings("RedundantIfStatement")
     private boolean isValidInput(int adress, int inputField) {
         //we get the String that was changed
         String value = (String)table.getModel().getValueAt(adress, inputField);

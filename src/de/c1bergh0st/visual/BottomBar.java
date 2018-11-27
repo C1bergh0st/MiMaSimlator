@@ -7,11 +7,11 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class BottomBar extends JPanel {
-    public JButton oneStep;
-    public JButton start;
-    private Steuerwerk mima;
-    private MemoryEditor memEdit;
-    private RegisterView registerView;
+    private final JButton oneStep;
+    private final JButton start;
+    private final Steuerwerk mima;
+    private final MemoryEditor memEdit;
+    private final RegisterView registerView;
 
 
     public BottomBar(Steuerwerk mima, MemoryEditor memEdit, RegisterView registerView){
