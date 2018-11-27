@@ -6,6 +6,7 @@ import de.c1bergh0st.visual.ParseUtil;
 
 public class Steuerwerk {
     public static final int MAX_ADRESS = 1048575;
+    public static final int MAX_VALUE = 16777215;
 
     private Register akku;
     private Register sar, sdr;
@@ -15,6 +16,9 @@ public class Steuerwerk {
     private ALU alu;
     private Register x, y, z;
     public boolean shouldHalt;
+    int lastExecutedAdress;
+    int lastChange;
+
 
     public Steuerwerk(){
         eins = new Register(true,1,24);
@@ -29,6 +33,8 @@ public class Steuerwerk {
         z = new Register();
         alu = new ALU(x,y,z);
         shouldHalt = false;
+        lastExecutedAdress = 0;
+        lastChange = 0;
         akku.setValue(0b111111111111111111111111);
         speicher.setMem(0,0b000000000000000000001111);
         speicher.setMem(1,0b000100000000000000000000);
@@ -47,6 +53,7 @@ public class Steuerwerk {
     public void stepTill(int maxsteps){
         //Reset the IAR to 0
         iar.setValue(0);
+        lastExecutedAdress = 0;
         //Execute Steps untill a Halt or untill maxsteps have been executed
         int steps = 0;
         while(!shouldHalt && steps < maxsteps){
@@ -59,6 +66,7 @@ public class Steuerwerk {
     }
 
     public void lightstep(){
+        lastExecutedAdress = iar.getValue();
         //load the next instruction from memory into the ir
         sar.setValue(iar.getValue());
         speicher.updateSDR();
@@ -132,6 +140,7 @@ public class Steuerwerk {
     }
 
     public void step(){
+        lastExecutedAdress = iar.getValue();
         //load the next instruction from memory into the ir
         sar.setValue(iar.getValue());
         speicher.updateSDR();
@@ -168,6 +177,7 @@ public class Steuerwerk {
         sar.setValue(ir.getMaskedValue());
         sdr.setValue(akku.getValue());
         speicher.write();
+        lastChange = sar.getValue();
     }
 
     private void add(){
@@ -273,6 +283,7 @@ public class Steuerwerk {
         sdr.setValue(akku.getValue());
         //save <akku> at <<ir>>
         speicher.write();
+        lastChange = sar.getValue();
     }
 
     private void rar(){
@@ -300,5 +311,27 @@ public class Steuerwerk {
 
     public Speicher getSpeicher(){
         return speicher;
+    }
+
+    public Register getAkku(){
+        return akku;
+    }
+
+    public Register getIAR() {
+        return iar;
+    }
+
+    public Register getIR() {
+        return ir;
+    }
+
+    public int getNextAdress(){
+        return iar.getValue();
+    }
+    public int getLastAdress(){
+        return lastExecutedAdress;
+    }
+    public int getLastChange(){
+        return lastChange;
     }
 }

@@ -1,6 +1,7 @@
 package de.c1bergh0st.visual;
 
 import de.c1bergh0st.debug.Debug;
+import de.c1bergh0st.mima.Steuerwerk;
 
 /**
  *  Just a Utility Class to convert from Strings to binary and vice versa
@@ -98,6 +99,31 @@ public class ParseUtil {
         return s;
     }
 
+    public static int getDisplayValue(String binary){
+        if(binary.length() == 24){
+            if(binary.charAt(0) == '0'){
+                return Integer.parseInt(binary.substring(1));
+            }
+            return ((-1) * (Integer.parseInt(binary.substring(1)))+1);
+        }
+        return -1;
+    }
+
+    public static int getDisplayValue(int i, boolean adress){
+        if(!adress){
+            if(i >= 0 && i <= Steuerwerk.MAX_VALUE){
+                if(i < 0b100000000000000000000000){
+                    return i;
+                }
+                return (-1) * (0b011111111111111111111111-(i % 0b100000000000000000000000) + 1);
+            }
+        } else{//20 Bit Adresses
+            if(i >= 0 && i <= Steuerwerk.MAX_ADRESS){
+                return i;
+            }
+        }
+        return -1;
+    }
 
     /**
      * @param i Integer

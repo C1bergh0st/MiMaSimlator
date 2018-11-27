@@ -54,9 +54,15 @@ class TableListener implements TableModelListener {
     }
 
     private void updateRow(int adress){
+        forceUpdate(adress,0);
         updateBinary(adress);
         updateRepr(adress);
         updateDec(adress);
+        forceUpdate(adress,4);
+    }
+
+    private void forceUpdate(int adress, int column){
+        table.getModel().setValueAt(table.getModel().getValueAt(adress,column),adress,column);
     }
 
     private void updateBinary(int adress) {

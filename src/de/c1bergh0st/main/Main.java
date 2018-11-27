@@ -21,10 +21,11 @@ public class Main {
         background.setLayout(new BorderLayout());
         background.setPreferredSize(new Dimension(800,600));
 
-        MemoryEditor memEdit = new MemoryEditor(mima.getSpeicher());
+        MemoryEditor memEdit = new MemoryEditor(mima.getSpeicher(),mima);
         background.add(memEdit.getPanel(), BorderLayout.WEST);
-        background.add(new RegisterView(mima), BorderLayout.EAST);
-        background.add(new BottomBar(mima, memEdit), BorderLayout.PAGE_END);
+        RegisterView regView = new RegisterView(mima);
+        background.add(regView, BorderLayout.CENTER);
+        background.add(new BottomBar(mima, memEdit, regView), BorderLayout.PAGE_END);
         background.add(new TopBar(mima, memEdit) ,BorderLayout.PAGE_START);
 
 

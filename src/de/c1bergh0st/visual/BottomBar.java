@@ -11,11 +11,13 @@ public class BottomBar extends JPanel {
     public JButton start;
     private Steuerwerk mima;
     private MemoryEditor memEdit;
+    private RegisterView registerView;
 
 
-    public BottomBar(Steuerwerk mima, MemoryEditor memEdit){
+    public BottomBar(Steuerwerk mima, MemoryEditor memEdit, RegisterView registerView){
         this.mima = mima;
         this.memEdit = memEdit;
+        this.registerView = registerView;
         this.setLayout(new FlowLayout());
         this.setBorder(BorderFactory.createLineBorder(Color.black));
 
@@ -24,6 +26,7 @@ public class BottomBar extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 mima.step();
                 memEdit.revalidate();
+                registerView.refresh();
             }
         } );
         add(oneStep);
@@ -33,6 +36,7 @@ public class BottomBar extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 mima.stepTill(10000);
                 memEdit.revalidate();
+                registerView.refresh();
             }
         } );
         add(start);
