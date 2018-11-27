@@ -1,47 +1,45 @@
 package de.c1bergh0st.visual;
 
+import de.c1bergh0st.mima.Steuerwerk;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 
 public class BottomBar extends JPanel {
-    public JButton oneStep;
-    private JLabel speedLabel;
-    public JSlider stepspeed;
-    private JLabel stepLabel;
-    public JSpinner stepsToTake;
-    public JButton start;
-    public JButton stop;
+    private final JButton oneStep;
+    private final JButton start;
+    private final Steuerwerk mima;
+    private final MemoryEditor memEdit;
+    private final RegisterView registerView;
 
 
-    public BottomBar(){
+    public BottomBar(Steuerwerk mima, MemoryEditor memEdit, RegisterView registerView){
+        this.mima = mima;
+        this.memEdit = memEdit;
+        this.registerView = registerView;
         this.setLayout(new FlowLayout());
         this.setBorder(BorderFactory.createLineBorder(Color.black));
 
         oneStep = new JButton("One Step");
+        oneStep.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                mima.step();
+                memEdit.revalidate();
+                registerView.refresh();
+            }
+        } );
         add(oneStep);
 
-        speedLabel = new JLabel("Speed:");
-        add(speedLabel);
-
-        stepspeed = new JSlider(1,5,3);
-        stepspeed.setMajorTickSpacing(1);
-        stepspeed.setPaintLabels(true);
-        add(stepspeed);
-
-        stepLabel = new JLabel("Steps:");
-        add(stepLabel);
-
-        stepsToTake = new JSpinner(new SpinnerNumberModel(100, //initial value
-                1, //min
-                1000, //max
-                1));
-        add(stepsToTake);
-
         start = new JButton("Start");
+        start.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                mima.stepTill(10000);
+                memEdit.revalidate();
+                registerView.refresh();
+            }
+        } );
         add(start);
-
-        stop = new JButton("Stop");
-        add(stop);
     }
 
 }

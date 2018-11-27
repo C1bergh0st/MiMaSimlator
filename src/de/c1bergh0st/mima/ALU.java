@@ -3,7 +3,9 @@ package de.c1bergh0st.mima;
 import de.c1bergh0st.debug.Debug;
 
 public class ALU {
-    Register x, y, z;
+    private Register x;
+    private Register y;
+    private Register z;
 
     public ALU(Register x, Register y, Register z){
         if(x != null && y != null && z != null){
@@ -45,6 +47,7 @@ public class ALU {
         z.setValue(Math.abs(x.getValue() ^ 0b111111111111111111111111));
     }
 
+    @SuppressWarnings("SpellCheckingInspection")
     public void rar(){ // z = rotate right x
         //if the last bit is 1 t is 1 else 0
         int t = x.getValue()%2;

@@ -30,7 +30,7 @@ public class Debug {
     }
 
     /**
-     * @param message Send a notii
+     * @param message Send a notification
      */
     public static void send(String message){
         System.out.println("Notice :"+message);

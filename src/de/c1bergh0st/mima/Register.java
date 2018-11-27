@@ -3,9 +3,9 @@ package de.c1bergh0st.mima;
 import de.c1bergh0st.debug.Debug;
 
 public class Register {
-    boolean readOnly;
-    int value;
-    int size;
+    private final boolean readOnly;
+    private int value;
+    private final int size;
 
     public Register(Boolean readOnly, int initialValue, int size){
         this.size = size;
@@ -40,11 +40,7 @@ public class Register {
 
     public boolean getFirstBit(){
         if(size == 24){
-            if(value >= Math.pow(2,23)) {
-                return true;
-            } else {
-                return false;
-            }
+            return value >= Math.pow(2, 23);
         } else {
             Debug.sendErr("Not Allowed");
             return false;

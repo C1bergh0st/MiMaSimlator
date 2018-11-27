@@ -3,8 +3,9 @@ package de.c1bergh0st.mima;
 import de.c1bergh0st.debug.Debug;
 
 public class Speicher {
-    Register sdr, sar;
-    int[] hauptSpeicher;
+    private Register sdr;
+    private Register sar;
+    private int[] hauptSpeicher;
 
     public Speicher(Register sdr, Register sar){
         if(sdr != null && sar != null && sar.getSize() == 20){
@@ -37,5 +38,10 @@ public class Speicher {
         return 0;
     }
 
+    public void clear(){
+        for(int i = 0; i < hauptSpeicher.length; i++){
+            setMem(i,0);
+        }
+    }
 
 }
