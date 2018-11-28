@@ -61,7 +61,9 @@ public class Steuerwerk {
             steps++;
         }
         if(steps == maxsteps){
-            DialogUtil.showErrorToUser("Error","After "+steps+", no HALT Command was found");
+            DialogUtil.showErrorToUser("Error","After "+steps+" Steps, no HALT Command was found");
+        } else{
+            DialogUtil.showDialogToUser("Success","Execution reached Halt on Step "+steps+" !");
         }
     }
 

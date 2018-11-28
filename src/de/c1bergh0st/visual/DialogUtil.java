@@ -11,4 +11,11 @@ public class DialogUtil {
                 JOptionPane.ERROR_MESSAGE);
     }
 
+    public static void showDialogToUser(String title,String message){
+        JOptionPane.showMessageDialog(null,
+                message,
+                title,
+                JOptionPane.INFORMATION_MESSAGE);
+    }
+
 }
