@@ -34,6 +34,8 @@ public class BottomBar extends JPanel {
         start = new JButton("Start");
         start.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                mima.getSpeicher().lockCurrState();
+                memEdit.revalidate();
                 mima.stepTill(10000);
                 memEdit.revalidate();
                 registerView.refresh();

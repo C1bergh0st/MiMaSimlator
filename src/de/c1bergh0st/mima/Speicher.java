@@ -15,6 +15,7 @@ public class Speicher {
             Debug.sendErr("SDR OR SAR IS NULL OR INVALID SIZE",2);
         }
         hauptSpeicher = new int[1048576];
+        lockedSpeicher = new int[hauptSpeicher.length];
     }
 
     public void updateSDR(){

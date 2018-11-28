@@ -28,7 +28,6 @@ public class TopBar extends JPanel{
         lock.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 mima.getSpeicher().lockCurrState();
-                reset.setEnabled(true);
                 memEdit.revalidate();
             }
         } );
@@ -40,7 +39,6 @@ public class TopBar extends JPanel{
                 memEdit.revalidate();
             }
         } );
-        reset.setEnabled(false);
         add(lock);
         add(reset);
 
