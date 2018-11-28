@@ -25,8 +25,21 @@ public class TopBar extends JPanel{
         this.setBorder(BorderFactory.createLineBorder(Color.black));
 
         lock = new JButton("Lock Code");
-        lock.setEnabled(false);
+        lock.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                mima.getSpeicher().lockCurrState();
+                reset.setEnabled(true);
+                memEdit.revalidate();
+            }
+        } );
         reset = new JButton("Reset");
+        reset.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                mima.resetAdress();
+                mima.getSpeicher().loadLockedState();
+                memEdit.revalidate();
+            }
+        } );
         reset.setEnabled(false);
         add(lock);
         add(reset);

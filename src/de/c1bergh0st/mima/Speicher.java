@@ -5,6 +5,7 @@ import de.c1bergh0st.debug.Debug;
 public class Speicher {
     Register sdr, sar;
     int[] hauptSpeicher;
+    int[] lockedSpeicher;
 
     public Speicher(Register sdr, Register sar){
         if(sdr != null && sar != null && sar.getSize() == 20){
@@ -40,6 +41,20 @@ public class Speicher {
     public void clear(){
         for(int i = 0; i < hauptSpeicher.length; i++){
             setMem(i,0);
+        }
+    }
+
+    public void lockCurrState(){
+        lockedSpeicher = new int[hauptSpeicher.length];
+        for(int i = 0; i < hauptSpeicher.length; i++){
+            lockedSpeicher[i] = hauptSpeicher[i];
+        }
+    }
+
+    public void loadLockedState(){
+
+        for(int i = 0; i < hauptSpeicher.length; i++){
+            hauptSpeicher[i] = lockedSpeicher[i];
         }
     }
 

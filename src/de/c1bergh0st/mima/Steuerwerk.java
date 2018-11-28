@@ -52,8 +52,8 @@ public class Steuerwerk {
 
     public void stepTill(int maxsteps){
         //Reset the IAR to 0
-        iar.setValue(0);
-        lastExecutedAdress = 0;
+        resetAdress();
+        shouldHalt = false;
         //Execute Steps untill a Halt or untill maxsteps have been executed
         int steps = 0;
         while(!shouldHalt && steps < maxsteps){
@@ -63,6 +63,12 @@ public class Steuerwerk {
         if(steps == maxsteps){
             DialogUtil.showErrorToUser("Error","After "+steps+", no HALT Command was found");
         }
+    }
+
+    public void resetAdress(){
+        iar.setValue(0);
+        lastExecutedAdress = 0;
+        lastChange = 0;
     }
 
     public void lightstep(){
