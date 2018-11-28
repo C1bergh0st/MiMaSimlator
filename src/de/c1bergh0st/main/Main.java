@@ -15,7 +15,7 @@ public class Main {
     public static void main(String[] args) {
         Steuerwerk mima = new Steuerwerk();
         Debug.send("Done");
-        JFrame frame = new JFrame("MiMa Simulator");
+        JFrame frame = new JFrame("MiMa Simulator by Philipp Berdesinski");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JPanel background = new JPanel();
         background.setLayout(new BorderLayout());
