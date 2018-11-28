@@ -3,18 +3,17 @@ package de.c1bergh0st.visual;
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 
-import de.c1bergh0st.debug.Debug;
 import de.c1bergh0st.mima.*;
 
 import java.awt.*;
 
 public class MemoryEditor{
-    private JTable table;
-    private JScrollPane panel;
-    private CustomTableModel model;
-    private TableListener listener;
-    private Steuerwerk mima;
-    String[][] data;
+    private final JTable table;
+    private final JScrollPane panel;
+    private final CustomTableModel model;
+    private final TableListener listener;
+    private final Steuerwerk mima;
+    private final String[][] data;
 
     public MemoryEditor(Speicher speicher, Steuerwerk mima){
         this.mima = mima;
@@ -32,7 +31,7 @@ public class MemoryEditor{
 
         for(int x = 1; x < cols.length; x++){
             for(int i = 0; i < shownLength; i++){
-                data[i][x] = new String();
+                data[i][x] = "";
             }
         }
         model = new CustomTableModel(data, cols);
