@@ -1,3 +1,6 @@
+//Copyright (C) 2018  Philipp Berdesinski
+// A MiMa Simulator with GUI
+// The Copyright outlined in the File LISENCE applies
 package de.c1bergh0st.visual;
 
 import de.c1bergh0st.mima.Steuerwerk;

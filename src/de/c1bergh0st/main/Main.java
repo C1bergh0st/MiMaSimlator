@@ -1,3 +1,6 @@
+//Copyright (C) 2018  Philipp Berdesinski
+// A MiMa Simulator with GUI
+// The Copyright outlined in the File LISENCE applies
 package de.c1bergh0st.main;
 
 import de.c1bergh0st.debug.Debug;
@@ -14,7 +17,7 @@ public class Main {
 
     public static void main(String[] args) {
         Steuerwerk mima = new Steuerwerk();
-        Debug.send("Done");
+        System.out.println("MiMaSimlator Copyright (C) 2018  Philipp Berdesinski");
         JFrame frame = new JFrame("MiMa Simulator by Philipp Berdesinski");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JPanel background = new JPanel();

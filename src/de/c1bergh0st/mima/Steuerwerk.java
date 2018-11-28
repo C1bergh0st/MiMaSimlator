@@ -1,3 +1,6 @@
+//Copyright (C) 2018  Philipp Berdesinski
+// A MiMa Simulator with GUI
+// The Copyright outlined in the File LISENCE applies
 package de.c1bergh0st.mima;
 
 import de.c1bergh0st.debug.Debug;
@@ -47,7 +50,6 @@ public class Steuerwerk {
         speicher.setMem(8,0b100100000000000000000001);
         speicher.setMem(9,0b111100000000000000000000);
         speicher.setMem(10,0b000000000000000000100000);
-        Debug.send(""+akku.getValue());
     }
 
     public void stepTill(int maxsteps){
