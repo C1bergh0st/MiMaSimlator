@@ -70,7 +70,7 @@ class TableListener implements TableModelListener {
     }
 
     private void updateDec(int adress){
-        table.getModel().setValueAt(""+speicher.getMem(adress),adress,3);
+        table.getModel().setValueAt(""+ParseUtil.getDisplayValue(speicher.getMem(adress),false),adress,3);
     }
 
     private void updateRepr(int adress) {

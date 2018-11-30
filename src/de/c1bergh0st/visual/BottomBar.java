@@ -39,7 +39,7 @@ public class BottomBar extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 mima.getSpeicher().lockCurrState();
                 memEdit.revalidate();
-                mima.stepTill(10000);
+                mima.stepTill(0xFFFFFFF);
                 memEdit.revalidate();
                 registerView.refresh();
             }

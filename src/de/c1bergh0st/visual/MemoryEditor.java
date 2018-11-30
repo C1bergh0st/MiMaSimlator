@@ -17,11 +17,12 @@ public class MemoryEditor{
     private final TableListener listener;
     private final Steuerwerk mima;
     private final String[][] data;
+    private int shownLength;
 
     public MemoryEditor(Speicher speicher, Steuerwerk mima){
         this.mima = mima;
         //How much of the Memory should be shown
-        int shownLength = 400;
+        shownLength = 400;
         //int shownLength = 1048576;
         String[] cols = {"Adress", "Binary", "\"Code\"", "Decimal","Comments"};
         data = new String[shownLength][cols.length];
@@ -41,11 +42,13 @@ public class MemoryEditor{
         table = new JTable(model);
         listener = new TableListener(table,speicher);
         model.addTableModelListener(listener);
+
+        //Formatting
         table.getColumnModel().getColumn(0).setPreferredWidth(60);
-        table.getColumnModel().getColumn(1).setPreferredWidth(180);
+        table.getColumnModel().getColumn(1).setPreferredWidth(200);
         table.getColumnModel().getColumn(2).setPreferredWidth(90);
         table.getColumnModel().getColumn(3).setPreferredWidth(90);
-        table.getColumnModel().getColumn(4).setPreferredWidth(300);
+        table.getColumnModel().getColumn(4).setPreferredWidth(200);
 
         //Colorcoding rows
         table.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
@@ -85,5 +88,23 @@ public class MemoryEditor{
 
     public JScrollPane getPanel() {
         return panel;
+    }
+
+    public void clearComments(){
+        for(int i = 0; i < shownLength; i++){
+            table.getModel().setValueAt("",i,4);
+        }
+    }
+
+    public String[] getComments(){
+        String[] result = new String[shownLength];
+        for(int i = 0; i < shownLength; i++){
+            result[i] = ""+table.getModel().getValueAt(i,4);
+        }
+        return result;
+    }
+
+    public void setComment(String str, int adress){
+        table.getModel().setValueAt(str,adress,4);
     }
 }

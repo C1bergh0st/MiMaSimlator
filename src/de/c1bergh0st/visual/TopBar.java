@@ -3,6 +3,7 @@
 // The Copyright outlined in the File LICENSE applies
 package de.c1bergh0st.visual;
 
+import de.c1bergh0st.mima.SpeicherSaver;
 import de.c1bergh0st.mima.Steuerwerk;
 
 import javax.swing.*;
@@ -20,6 +21,7 @@ public class TopBar extends JPanel{
     private Steuerwerk mima;
     private MemoryEditor memEdit;
     HelpWindow currentHelpWindow;
+    private JFrame parent;
 
     public TopBar(Steuerwerk mima, MemoryEditor memEdit){
         this.mima = mima;
@@ -48,9 +50,17 @@ public class TopBar extends JPanel{
         add(Box.createHorizontalStrut(20));
 
         save = new JButton("Save");
-        save.setEnabled(false);
+        save.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                SpeicherSaver.saveMemory(mima.getSpeicher().getMem(),parent,memEdit.getComments());
+            }
+        } );
         load = new JButton("Load");
-        load.setEnabled(false);
+        load.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                SpeicherSaver.loadMemory(parent,memEdit,mima.getSpeicher());
+            }
+        } );
         add(save);
         add(load);
 
@@ -63,6 +73,7 @@ public class TopBar extends JPanel{
                 int dialogResult = JOptionPane.showConfirmDialog(null, "Clear Everything?","Warning",JOptionPane.YES_NO_OPTION);
                 if(dialogResult == JOptionPane.YES_OPTION) {
                     mima.getSpeicher().clear();
+                    memEdit.clearComments();
                     memEdit.revalidate();
                 }
             }
@@ -82,4 +93,8 @@ public class TopBar extends JPanel{
         } );
         add(help);
     }
+    public void setFrame(JFrame frame){
+        parent = frame;
+    }
+
 }

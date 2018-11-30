@@ -43,7 +43,7 @@ public class Register {
 
     public boolean getFirstBit(){
         if(size == 24){
-            return value >= Math.pow(2, 23);
+            return value >= 0b011111111111111111111111;
         } else {
             Debug.sendErr("Not Allowed");
             return false;
@@ -55,7 +55,7 @@ public class Register {
             if(v < 0) {
                 Debug.sendErr("Value " + v + " not Supported by Register", 2);
             } else {
-                value = v % (int)(Math.pow(2,size));
+                value = v & 0b111111111111111111111111;
             }
         } else {
             Debug.sendErr("The Register is READ-ONLY");

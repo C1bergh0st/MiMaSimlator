@@ -35,11 +35,25 @@ public class Speicher {
         }
     }
 
+    public void setMem(int[] memory){
+        for(int i = 0; i < memory.length; i++){
+            this.setMem(i,memory[i]);
+        }
+    }
+
     public int getMem(int adr){
         if(adr >= 0 && adr <= Steuerwerk.MAX_ADRESS){
             return hauptSpeicher[adr];
         }
         return 0;
+    }
+
+    public int[] getMem(){
+        int[] res = new int[hauptSpeicher.length];
+        for(int i = 0; i < hauptSpeicher.length; i++){
+            res[i] = hauptSpeicher[i];
+        }
+        return res;
     }
 
     public void clear(){
